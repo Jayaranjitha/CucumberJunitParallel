@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>POCucumberJunitCheckPArallel</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <cucumber.version>7.6.0</cucumber.version>
+        <selenium.version>4.3.0</selenium.version>
+       <!-- <webdrivermanager.version>5.2.1</webdrivermanager.version> -->
+        <junit.version>4.13.2</junit.version>
+        <apache.common.version>2.4</apache.common.version>
+        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
+        <maven.compiler.source.version>1.8</maven.compiler.source.version>
+        <maven.compiler.target.version>1.8</maven.compiler.target.version>
+         <allure.junit4.version>2.25.0</allure.junit4.version>
+        <allure.version>2.25.0</allure.version>
+         <allure.maven>2.12.0</allure.maven>
+        <aspectj.version>1.9.21</aspectj.version>
+    </properties>
+
+ <!-- Add allure-bom to dependency management to ensure correct versions of all the dependencies are used -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-bom</artifactId>
+                <version>${allure.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        
+
+<dependency>
+    <groupId>tech.grasshopper</groupId>
+    <artifactId>extentreports-cucumber7-adapter</artifactId>
+    <version>1.7.0</version>
+</dependency>
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>5.0.9</version>
+</dependency>
+
+     <dependency>
+			  <groupId>net.masterthought </groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>3.20.0</version>
+		</dependency> 
+		
+		  <dependency>
+			  <groupId>io.woo </groupId>
+            <artifactId>htmltopdf</artifactId>
+            <version>1.0.5</version>
+		</dependency>
+		
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+        <!-- Web Driver Manager -->
+       <!-- <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency> -->
+
+        <!-- JUnit 4 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>31.0.1-jre</version>
+    </dependency>
+        
+          <!--Allure Cucumber Dependency-->     
+     <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <scope>test</scope>
+        </dependency>
+    
+    <!--Allure Reporting Dependency-->     
+     <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <scope>test</scope>
+        </dependency>
+    
+
+        <!-- Apache Common -->
+        <dependency>
+            <groupId>org.apache.directory.studio</groupId>
+            <artifactId>org.apache.commons.io</artifactId>
+            <version>${apache.common.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source.version}</source>
+                    <target>${maven.compiler.target.version}</target>
+                </configuration>
+            </plugin>
+            
+                    <!--this plugin is for execution report generation after parallel execution  -->
+         <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version> 
+        <executions>  
+    <execution> 
+    <id>first-execution</id> 
+     <phase>install</phase>  
+     <goals>  
+      <goal>java</goal>  
+     </goals>  
+     <configuration> 
+      <classpathScope>test</classpathScope> 
+      <mainClass>com.example.utils.PDFReportParallelExecution</mainClass>  
+     </configuration>  
+    </execution>  
+   </executions>  
+        </plugin> 
+        
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+                <configuration>
+					
+					 <forkCount>7</forkCount> 
+					<reuseForks>true</reuseForks> 
+					 <!--  <parallel>methods</parallel>
+                    <threadCount>2</threadCount> -->
+                    
+                    <includes>
+                        <include>**/*Tests.java</include>
+                         <!--<include>**/TestRunnerRerun.java</include> -->
+                    </includes>
+                
+                       <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven}</version>
+                <configuration>
+                    <reportVersion>${allure.maven}</reportVersion>
+                </configuration>
+           
+            </plugin>
+            
+            <plugin>
+        <groupId>net.masterthought</groupId>
+        <artifactId>maven-cucumber-reporting</artifactId>
+         <version>5.0.0</version>
+        <executions>
+          <execution>
+            <id>execution</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <projectName>POCucumberJunitCheckParallel</projectName>
+              <outputDirectory>${project.build.directory}/cucumber-JVM-reports</outputDirectory>
+                <enableFlashCharts>true</enableFlashCharts>
+                <buildNumber>42</buildNumber> 
+               <parallelTesting>false</parallelTesting>
+                <inputDirectory>${project.build.directory}</inputDirectory>
+              <jsonFiles>
+              <jsonFile>**/cucumber.json</jsonFile>
+              </jsonFiles>
+              <testFailureIgnore>true</testFailureIgnore>
+              <buildSuccessOnTestFailure>true</buildSuccessOnTestFailure>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+
+        </plugins>
+    </build>
+</project>

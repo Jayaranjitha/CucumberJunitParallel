@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="20.845">
+<testcase classname="Login to HRM Application" name="Login with blank username" time="20.804">
+<failure message="expected:&lt;Required[]&gt; but was:&lt;Required[1]&gt;" type="org.junit.ComparisonFailure"><![CDATA[Given User is on HRMLogin page "https://opensource-demo.orangehrmlive.com/".passed
+When User enters username as " " and password as "admin123".................passed
+Then User should be able to see a message "Required1" below Username........failed
+
+StackTrace:
+org.junit.ComparisonFailure: expected:<Required[]> but was:<Required[1]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.example.definitions.LoginPageDefinitions.verifyMissingUsernameMessage(LoginPageDefinitions.java:63)
+	at ✽.User should be able to see a message "Required1" below Username(file:///C:/Users/KALAIMAN/EclipseWorkspace/POCucumberJunitCheckPArallel/src/test/resources/features/LoginPage.feature:32)
+]]></failure>
+</testcase>
+</testsuite>
