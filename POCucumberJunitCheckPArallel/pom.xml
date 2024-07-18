@@ -15,15 +15,16 @@
        <!-- <webdrivermanager.version>5.2.1</webdrivermanager.version> -->
         <junit.version>4.13.2</junit.version>
         <apache.common.version>2.4</apache.common.version>
-        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.12.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
-        <maven.compiler.source.version>1.8</maven.compiler.source.version>
-        <maven.compiler.target.version>1.8</maven.compiler.target.version>
+        <maven.compiler.source.version>17</maven.compiler.source.version>
+        <maven.compiler.target.version>17</maven.compiler.target.version>
          <allure.junit4.version>2.25.0</allure.junit4.version>
         <allure.version>2.25.0</allure.version>
          <allure.maven>2.12.0</allure.maven>
         <aspectj.version>1.9.21</aspectj.version>
     </properties>
+
 
  <!-- Add allure-bom to dependency management to ensure correct versions of all the dependencies are used -->
     <dependencyManagement>
@@ -46,6 +47,13 @@
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
+        
+        <dependency>
+  <groupId>org.projectlombok</groupId>
+  <artifactId>lombok</artifactId>
+  <version>1.18.28</version>
+</dependency>
+
         
 
 <dependency>
@@ -138,8 +146,11 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>${maven.compiler.source.version}</source>
-                    <target>${maven.compiler.target.version}</target>
+                   <!-- <source>${maven.compiler.source.version}</source>
+                    <target>${maven.compiler.target.version}</target> -->
+                    <release>8</release>
+<!--                    <source>8</source>-->
+<!--                    <target>8</target>-->
                 </configuration>
             </plugin>
             
@@ -159,7 +170,7 @@
       <classpathScope>test</classpathScope> 
       <mainClass>com.example.utils.PDFReportParallelExecution</mainClass>  
      </configuration>  
-    </execution>  
+    </execution>
    </executions>  
         </plugin> 
         

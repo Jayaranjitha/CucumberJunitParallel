@@ -26,7 +26,7 @@ public class Hooks {
 	
 
     @Before
-    public static void setUp() {
+    public static void setUp() throws Exception {
 
        driver=  new HelperClass().setupDriver();
            

@@ -12,7 +12,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import java.time.Duration;
+//import java.time.Duration;
+
 import java.util.List;
 
 import org.openqa.selenium.*;
@@ -41,9 +42,9 @@ public class SeleniumTests
 		//WebElement autooptions= driver.findElement(By.xpath("//*[@role='listbox'][contains(.,'Emily')])"));
 		
 		
-		WebDriverWait  wait = new WebDriverWait(driver, Duration.ofSeconds(180));
+	//	WebDriverWait  wait = new WebDriverWait(driver, Time);
 		
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@role='option'][contains(.,'Emily')]"))));
+		//wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@role='option'][contains(.,'Emily')]"))));
 		
 		
 //		//wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@role='listbox']"))));
@@ -108,7 +109,7 @@ public class SeleniumTests
             	options.addArguments("--remote-allow-origins=*");
             	 driver = new ChromeDriver(options);
             	
-                  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            //      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
                   driver.manage().window().maximize();
               driver.get("https://opensource-demo.orangehrmlive.com/");
                driver.findElement(By.name("username")).sendKeys("Admin");
