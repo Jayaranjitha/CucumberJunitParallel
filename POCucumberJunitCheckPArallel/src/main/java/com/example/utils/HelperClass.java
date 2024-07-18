@@ -29,6 +29,7 @@ public class HelperClass {
         //  System.out.println(WebDriverManager.chromedriver().getBrowserPath());
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--headless=new");
         	options.addArguments("--remote-allow-origins=*");
         // driver = new ChromeDriver(options);
         driver.set(new ChromeDriver(options));
